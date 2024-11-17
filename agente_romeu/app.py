@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Token do seu bot do Telegram
-TELEGRAM_TOKEN = 'SEU_TOKEN_TELEGRAM'
+TELEGRAM_TOKEN = '7563586794:AAGelykM5TOjnTMZGJW2T9aa2ehaEAdUvZ8'
 TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 
 @app.route('/webhook', methods=['POST'])
