@@ -1,0 +1,32 @@
+import requests
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Token do seu bot do Telegram
+TELEGRAM_TOKEN = 'SEU_TOKEN_TELEGRAM'
+TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    data = request.get_json()
+
+    # Capturar dados do Dialogflow e Telegram
+    chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
+    message_text = "*Mensagem em negrito*\n_Ítalo em itálico_\n[Link](http://example.com)"
+
+    # Configurar a mensagem para o Telegram
+    payload = {
+        'chat_id': chat_id,
+        'text': message_text,
+        'parse_mode': 'Markdown'  # Pode ser 'MarkdownV2' para sintaxe mais avançada
+    }
+
+    # Enviar a mensagem para o Telegram
+    response = requests.post(TELEGRAM_URL, data=payload)
+
+    return jsonify({'status': 'success'})
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
