@@ -3,40 +3,39 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Token do seu bot do Telegram
+# Token do bot do Telegram
 TELEGRAM_TOKEN = '7563586794:AAGelykM5TOjnTMZGJW2T9aa2ehaEAdUvZ8'
 TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 
+
 @app.route('/', methods=['POST'])
 def webhook():
+    # Obter dados enviados pelo Dialogflow
     data = request.get_json(silent=True)
-    print(data)  # Para fins de depuração, verificar o conteúdo recebido
+    print("Requisição recebida:", data)
 
-    # Capturar dados do Dialogflow e Telegram
+    # Capturar informações relevantes
     chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
-    message_text = data['queryResult']['fulfillmentText']  # Texto retornado pelo Dialogflow
+    message_text = data['queryResult']['fulfillmentText']  # Mensagem da intent
 
-    # Configurar a mensagem para o Telegram
+    # Formatar a mensagem no padrão desejado
+    formatted_message = f"*Mensagem formatada para o Telegram:* {message_text}"
+
+    # Enviar mensagem formatada ao Telegram
     payload = {
         'chat_id': chat_id,
-        'text': message_text,
-        'parse_mode': 'Markdown'  # Pode ser 'MarkdownV2' para sintaxe mais avançada
+        'text': formatted_message,
+        'parse_mode': 'Markdown'  # Ou 'MarkdownV2' para suporte avançado
     }
-
-    # Enviar a mensagem diretamente para o Telegram
     response = requests.post(TELEGRAM_URL, data=payload)
+    print("Resposta do Telegram:", response.status_code, response.text)
 
-    if response.status_code == 200:
-        print("Mensagem enviada ao Telegram com sucesso!")
-    else:
-        print(f"Erro ao enviar mensagem ao Telegram: {response.status_code}, {response.text}")
-
-    # Informar ao Dialogflow que o webhook tratou a mensagem
+    # Retornar a mensagem alterada para o Dialogflow
     return jsonify({
-        "fulfillmentText": None,  # Resposta vazia para evitar duplicação
-        "source": "webhook"
+        "fulfillmentText": formatted_message  # Envia apenas a mensagem formatada
     })
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.debug = False
+    app.run()
