@@ -18,21 +18,22 @@ def webhook():
     chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
     message_text = data['queryResult']['fulfillmentText']  # Mensagem da intent
 
-    # Formatar a mensagem no padrão desejado
-    formatted_message = f"*Mensagem formatada para o Telegram:* {message_text}"
+    # Formatar a mensagem no padrão desejado para o Telegram
+    formatted_message = f"*Mensagem formatada para o Telegram:*\n\n{message_text}"
+    print("Mensagem formatada:", formatted_message)
 
-    # Enviar mensagem formatada ao Telegram
+    # Enviar mensagem ao Telegram
     payload = {
         'chat_id': chat_id,
         'text': formatted_message,
-        'parse_mode': 'Markdown'  # Ou 'MarkdownV2' para suporte avançado
+        'parse_mode': 'Markdown'
     }
-    response = requests.post(TELEGRAM_URL, data=payload)
-    print("Resposta do Telegram:", response.status_code, response.text)
+    telegram_response = requests.post(TELEGRAM_URL, data=payload)
+    print("Resposta do Telegram:", telegram_response.status_code, telegram_response.text)
 
-    # Retornar a mensagem alterada para o Dialogflow
+    # Retornar uma resposta vazia ao Dialogflow
     return jsonify({
-        "fulfillmentText": formatted_message  # Envia apenas a mensagem formatada
+        "fulfillmentText": ""  # Retorna vazio para evitar duplicações
     })
 
 
