@@ -34,8 +34,6 @@ def webhook():
     # Retornar um status vazio para que o Dialogflow não envie uma segunda resposta
     return   # Isso evita a duplicação
     # return jsonify({'status': 'success'})
-
-
     
 
 if __name__ == '__main__':
