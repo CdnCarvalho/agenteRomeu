@@ -25,7 +25,7 @@ def webhook():
     # Enviar mensagem ao Telegram
     payload = {
         "telegram": {
-            'chat_id': chat_id,
+            # 'chat_id': chat_id,
             'text': formatted_message,
             'parse_mode': 'Markdown'
         }
