@@ -7,7 +7,7 @@ app = Flask(__name__)
 TELEGRAM_TOKEN = '7563586794:AAGelykM5TOjnTMZGJW2T9aa2ehaEAdUvZ8'
 TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def webhook():
     data = request.get_json(silent=True)
 
@@ -25,7 +25,7 @@ def webhook():
     # # Enviar a mensagem para o Telegram
     # response = requests.post(TELEGRAM_URL, data=payload)
     # Enviar a mensagem diretamente para o Telegram
-    # requests.post(TELEGRAM_URL, data=payload)
+    requests.post(TELEGRAM_URL, data=payload)
 
     # Retornar um status vazio para que o Dialogflow não envie uma segunda resposta
     return jsonify({})  # Isso evita a duplicação
