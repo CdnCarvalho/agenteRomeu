@@ -12,30 +12,40 @@ TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 def webhook():
     # Obter dados enviados pelo Dialogflow
     data = request.get_json(silent=True)
-    print("Requisição recebida:", data)
+    print("=== Requisição recebida ===")
+    print(data)
 
     # Capturar informações relevantes
-    chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
-    message_text = data['queryResult']['fulfillmentText']  # Mensagem da intent
+    chat_id = data.get('originalDetectIntentRequest', {}).get('payload', {}).get('data', {}).get('chat', {}).get('id')
+    message_text = data.get('queryResult', {}).get('fulfillmentText', "")
+
+    if not chat_id:
+        print("Erro: 'chat_id' não encontrado.")
+        return jsonify({"fulfillmentText": "Erro ao processar a mensagem."})
+    
+    if not message_text:
+        print("Aviso: 'fulfillmentText' está vazio.")
+        return jsonify({"fulfillmentText": "Sem resposta para enviar."})
 
     # Formatar a mensagem no padrão desejado para o Telegram
     formatted_message = f"*Mensagem formatada para o Telegram:*\n\n{message_text}"
-    print("Mensagem formatada:", formatted_message)
 
-    # Enviar mensagem ao Telegram
-    payload = {
+    # Criar o payload para o Telegram
+    telegram_payload = {
         "telegram": {
-            # 'chat_id': chat_id,
-            'text': formatted_message,
-            'parse_mode': 'Markdown'
+            "text": formatted_message,  # Mensagem formatada
+            "parse_mode": "Markdown"  # Usar Markdown para formatação
         }
     }
-    telegram_response = requests.post(TELEGRAM_URL, data=payload)
+
+    # Enviar mensagem ao Telegram
+    telegram_response = requests.post(TELEGRAM_URL, json=telegram_payload)  # Use 'json' para enviar um JSON estruturado
     print("Resposta do Telegram:", telegram_response.status_code, telegram_response.text)
 
-    # Retornar uma resposta vazia ao Dialogflow
+    # Retornar uma resposta vazia para evitar duplicação de mensagem do Dialogflow
     return jsonify({
-        "fulfillmentText": ""  # Retorna vazio para evitar duplicações
+        "fulfillmentText": "",  # Retorna vazio para impedir resposta do Dialogflow
+        "source": "webhook"
     })
 
 
