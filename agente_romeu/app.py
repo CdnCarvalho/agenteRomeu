@@ -18,7 +18,7 @@ def webhook():
     # Configurar a mensagem para o Telegram
     payload = {
         'chat_id': chat_id,
-        'text': data['queryResult']['fulfillmentText'],
+        'text': data['queryResult']['fulfillmentMessages'],
         'parse_mode': 'Markdown'  # Pode ser 'MarkdownV2' para sintaxe mais avançada
     }
 
