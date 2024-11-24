@@ -26,7 +26,7 @@ def webhook():
     # # Enviar a mensagem para o Telegram
     # response = requests.post(TELEGRAM_URL, data=payload)
     # Enviar a mensagem diretamente para o Telegram
-    requests.post(TELEGRAM_URL, data)
+    requests.post(TELEGRAM_URL, payload)
     # print("\n\nPayload::::", payload)
 
     # print("\n\n ****** conjunto de dados", data)
