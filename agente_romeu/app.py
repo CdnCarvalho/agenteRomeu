@@ -7,14 +7,14 @@ app = Flask(__name__)
 TELEGRAM_TOKEN = '7563586794:AAGelykM5TOjnTMZGJW2T9aa2ehaEAdUvZ8'
 TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def webhook():
     data = request.get_json(silent=True)
-    print(data)
+    print(data)  # Para fins de depuração, verificar o conteúdo recebido
+
     # Capturar dados do Dialogflow e Telegram
     chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
-    message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
-    # print("\n\nMensagem recuperada::::", message_text)
+    message_text = data['queryResult']['fulfillmentText']  # Texto retornado pelo Dialogflow
 
     # Configurar a mensagem para o Telegram
     payload = {
@@ -23,22 +23,20 @@ def webhook():
         'parse_mode': 'Markdown'  # Pode ser 'MarkdownV2' para sintaxe mais avançada
     }
 
-    # # Enviar a mensagem para o Telegram
-    # response = requests.post(TELEGRAM_URL, data=payload)
     # Enviar a mensagem diretamente para o Telegram
-    requests.post(TELEGRAM_URL, payload)
-    # print("\n\nPayload::::", payload)
+    response = requests.post(TELEGRAM_URL, data=payload)
 
-    # print("\n\n ****** conjunto de dados", data)
+    if response.status_code == 200:
+        print("Mensagem enviada ao Telegram com sucesso!")
+    else:
+        print(f"Erro ao enviar mensagem ao Telegram: {response.status_code}, {response.text}")
 
-    # Retornar um status vazio para que o Dialogflow não envie uma segunda resposta
+    # Informar ao Dialogflow que o webhook tratou a mensagem
     return jsonify({
-        "fulfillmentText": None,
+        "fulfillmentText": "",  # Resposta vazia para evitar duplicação
         "source": "webhook"
-    }) # Isso evita a duplicação
-    # return jsonify({'status': 'success'})
-    
+    })
+
 
 if __name__ == '__main__':
-    app.debug = False
-    app.run()
+    app.run(debug=False)
