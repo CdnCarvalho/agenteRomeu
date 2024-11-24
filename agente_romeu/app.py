@@ -14,7 +14,7 @@ def webhook():
     # Capturar dados do Dialogflow e Telegram
     chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
     message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
-    print("\n\nMensagem recuperada::::", message_text)
+    # print("\n\nMensagem recuperada::::", message_text)
 
     # Configurar a mensagem para o Telegram
     payload = {
@@ -26,10 +26,10 @@ def webhook():
     # # Enviar a mensagem para o Telegram
     # response = requests.post(TELEGRAM_URL, data=payload)
     # Enviar a mensagem diretamente para o Telegram
-    requests.post(TELEGRAM_URL, data=payload)
-    print("\n\nPayload::::", payload)
+    requests.post(TELEGRAM_URL, data)
+    # print("\n\nPayload::::", payload)
 
-    print("\n\n ****** conjunto de dados", data)
+    # print("\n\n ****** conjunto de dados", data)
 
     # Retornar um status vazio para que o Dialogflow não envie uma segunda resposta
     return jsonify({})  # Isso evita a duplicação
