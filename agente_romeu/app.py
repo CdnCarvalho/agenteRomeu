@@ -1,6 +1,5 @@
 import requests
 from flask import Flask, request, jsonify
-import json
 
 app = Flask(__name__)
 
@@ -23,7 +22,6 @@ def webhook():
         'parse_mode': 'Markdown'  # Pode ser 'MarkdownV2' para sintaxe mais avançada
     }
 
-    payload = json.dumps(payload)
     # # Enviar a mensagem para o Telegram
     # response = requests.post(TELEGRAM_URL, data=payload)
     # Enviar a mensagem diretamente para o Telegram
