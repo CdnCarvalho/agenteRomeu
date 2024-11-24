@@ -12,7 +12,7 @@ def webhook():
     data = request.get_json(silent=True)
 
     # Capturar dados do Dialogflow e Telegram
-    chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
+    # chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
     message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
 
     # Configurar a mensagem para o Telegram
