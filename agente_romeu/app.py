@@ -32,7 +32,7 @@ def webhook():
     # print("\n\n ****** conjunto de dados", data)
 
     # Retornar um status vazio para que o Dialogflow não envie uma segunda resposta
-    return jsonify({})  # Isso evita a duplicação
+    return   # Isso evita a duplicação
     # return jsonify({'status': 'success'})
 
 
