@@ -16,6 +16,10 @@ def webhook():
         chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
         message_text = data['queryResult']['fulfillmentText']  # Texto retornado pelo Dialogflow
 
+          # Capturar dados do Dialogflow e Telegram
+        chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
+        message_text = "**Mensagem em negrito**\n_teste de formatação_\n[Link](http://example.com)"
+
         # Configurar a mensagem para o Telegram
         payload = {
             'chat_id': chat_id,
