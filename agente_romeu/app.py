@@ -24,9 +24,11 @@ def webhook():
 
     # Enviar mensagem ao Telegram
     payload = {
-        'chat_id': chat_id,
-        'text': formatted_message,
-        'parse_mode': 'Markdown'
+        "telegram": {
+            'chat_id': chat_id,
+            'text': formatted_message,
+            'parse_mode': 'Markdown'
+        }
     }
     telegram_response = requests.post(TELEGRAM_URL, data=payload)
     print("Resposta do Telegram:", telegram_response.status_code, telegram_response.text)
