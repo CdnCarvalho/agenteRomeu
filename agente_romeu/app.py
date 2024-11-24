@@ -5,15 +5,15 @@ app = Flask(__name__)
 
 # Token do seu bot do Telegram
 TELEGRAM_TOKEN = '7563586794:AAGelykM5TOjnTMZGJW2T9aa2ehaEAdUvZ8'
-TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
+TELEGRAM_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}'
 
 @app.route('/', methods=['POST'])
 def webhook():
     data = request.get_json(silent=True)
     print(data)
     # Capturar dados do Dialogflow e Telegram
-    message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
     chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
+    message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
 
     # Configurar a mensagem para o Telegram
     payload = {
