@@ -1,0 +1,102 @@
+{
+    "responseId": "7aed7f6c-dac6-4589-a93a-9e640ef9770e-e6f94c49",
+    "queryResult": {
+        "queryText": "claudenri",
+        "action": "DefaultWelcomeIntent.DefaultWelcomeIntent-custom",
+        "parameters": {
+            "username": {
+                "name": "claudenri"
+            }
+        },
+        "allRequiredParamsPresent": true,
+        "fulfillmentText": "Olá claudenri! Eu sou o Romeu, o seu agente virtual. \nO que você gostaria de fazer? \n\n=======================\n             *Menu de Opções*\n=======================\n\n_Informe_ o número, por favor:\n1 - *Realizar* pedido\n2 - Ver o cardápio\n3 - Promoções\n4 - Status do pedido\n5 - Horário de funcionamento\n6 - Cadastro\n7 - Falar com atendente",
+        "fulfillmentMessages": [
+            {
+                "text": {
+                    "text": [
+                        "Olá claudenri! Eu sou o Romeu, o seu agente virtual. \nO que você gostaria de fazer? \n\n=======================\n             *Menu de Opções*\n=======================\n\n_Informe_ o número, por favor:\n1 - *Realizar* pedido\n2 - Ver o cardápio\n3 - Promoções\n4 - Status do pedido\n5 - Horário de funcionamento\n6 - Cadastro\n7 - Falar com atendente"
+                    ]
+                }
+            }
+        ],
+        "outputContexts": [
+            {
+                "name": "projects/projeto-agentev-cly9/agent/sessions/56c55fb6-0fa5-39fd-8407-2ec1264b3e6b/contexts/menu-followup",
+                "lifespanCount": 7,
+                "parameters": {
+                    "username": {
+                        "name": "claudenri"
+                    },
+                    "username.original": "claudenri"
+                }
+            },
+            {
+                "name": "projects/projeto-agentev-cly9/agent/sessions/56c55fb6-0fa5-39fd-8407-2ec1264b3e6b/contexts/menu-followup-2",
+                "lifespanCount": 7,
+                "parameters": {
+                    "username": {
+                        "name": "claudenri"
+                    },
+                    "username.original": "claudenri"
+                }
+            },
+            {
+                "name": "projects/projeto-agentev-cly9/agent/sessions/56c55fb6-0fa5-39fd-8407-2ec1264b3e6b/contexts/menu-followup-3",
+                "lifespanCount": 2,
+                "parameters": {
+                    "username": {
+                        "name": "claudenri"
+                    },
+                    "username.original": "claudenri"
+                }
+            },
+            {
+                "name": "projects/projeto-agentev-cly9/agent/sessions/56c55fb6-0fa5-39fd-8407-2ec1264b3e6b/contexts/defaultwelcomeintent-followup",
+                "lifespanCount": 1,
+                "parameters": {
+                    "username": {
+                        "name": "claudenri"
+                    },
+                    "username.original": "claudenri"
+                }
+            },
+            {
+                "name": "projects/projeto-agentev-cly9/agent/sessions/56c55fb6-0fa5-39fd-8407-2ec1264b3e6b/contexts/__system_counters__",
+                "parameters": {
+                    "no-input": 0.0,
+                    "no-match": 0.0,
+                    "username": {
+                        "name": "claudenri"
+                    },
+                    "username.original": "claudenri"
+                }
+            }
+        ],
+        "intent": {
+            "name": "projects/projeto-agentev-cly9/agent/intents/6ae14b19-fe2b-4a9d-99f9-791fbb856662",
+            "displayName": "Menu"
+        },
+        "intentDetectionConfidence": 1.0,
+        "languageCode": "pt-br"
+    },
+    "originalDetectIntentRequest": {
+        "source": "telegram",
+        "payload": {
+            "data": {
+                "date": "1732462902",
+                "chat": {
+                    "id": "7751606686",
+                    "type": "private"
+                },
+                "text": "claudenri",
+                "from": {
+                    "id": "7751606686",
+                    "first_name": "Claudenir",
+                    "language_code": "pt-br"
+                },
+                "message_id": "618"
+            }
+        }
+    },
+    "session": "projects/projeto-agentev-cly9/agent/sessions/56c55fb6-0fa5-39fd-8407-2ec1264b3e6b"
+}

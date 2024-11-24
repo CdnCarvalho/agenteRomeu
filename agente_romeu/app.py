@@ -13,12 +13,12 @@ def webhook():
     print(data)
     # Capturar dados do Dialogflow e Telegram
     chat_id = data['originalDetectIntentRequest']['payload']['data']['chat']['id']
-    message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
+    # message_text = data['queryResult']['fulfillmentText']   # Texto retornado pelo Dialogflow
 
     # Configurar a mensagem para o Telegram
     payload = {
         'chat_id': chat_id,
-        'text': message_text,
+        # 'text': message_text,
         'parse_mode': 'Markdown'  # Pode ser 'MarkdownV2' para sintaxe mais avançada
     }
 
@@ -31,6 +31,8 @@ def webhook():
     return jsonify({})  # Isso evita a duplicação
     # return jsonify({'status': 'success'})
 
+
+    
 
 if __name__ == '__main__':
     app.debug = False
