@@ -33,7 +33,7 @@ def webhook():
 
     # Informar ao Dialogflow que o webhook tratou a mensagem
     return jsonify({
-        "fulfillmentText": "",  # Resposta vazia para evitar duplicação
+        "fulfillmentText": None,  # Resposta vazia para evitar duplicação
         "source": "webhook"
     })
 
