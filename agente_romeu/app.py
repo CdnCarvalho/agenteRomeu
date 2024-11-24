@@ -26,13 +26,13 @@ def webhook():
     # # Enviar a mensagem para o Telegram
     # response = requests.post(TELEGRAM_URL, data=payload)
     # Enviar a mensagem diretamente para o Telegram
-    requests.post(TELEGRAM_URL, payload)
+    # requests.post(TELEGRAM_URL, payload)
     # print("\n\nPayload::::", payload)
 
     # print("\n\n ****** conjunto de dados", data)
 
     # Retornar um status vazio para que o Dialogflow não envie uma segunda resposta
-    return   # Isso evita a duplicação
+    return requests.post(TELEGRAM_URL, payload)  # Isso evita a duplicação
     # return jsonify({'status': 'success'})
     
 
